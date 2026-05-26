@@ -1,0 +1,606 @@
+html {
+  color-scheme: dark;
+}
+
+/* Base page reset and shared form behavior. */
+html,
+body,
+#root {
+  min-height: 100%;
+}
+
+body {
+  margin: 0;
+  min-width: 320px;
+  background: #07110f;
+  font-family:
+    Inter, ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI",
+    sans-serif;
+}
+
+* {
+  box-sizing: border-box;
+}
+
+button,
+input,
+select {
+  font: inherit;
+}
+
+button,
+select {
+  cursor: pointer;
+}
+
+select,
+input {
+  color: #f8fafc;
+  outline: none;
+  transition:
+    border-color 160ms ease,
+    box-shadow 160ms ease,
+    background-color 160ms ease,
+    transform 160ms ease;
+}
+
+input::placeholder {
+  color: #71717a;
+}
+
+select:focus,
+input:focus {
+  border-color: var(--court-accent, rgba(45, 212, 191, 0.75)) !important;
+  box-shadow:
+    0 0 0 3px var(--court-focus, rgba(45, 212, 191, 0.16)),
+    0 16px 38px rgba(0, 0, 0, 0.18);
+}
+
+select:hover,
+input:hover {
+  border-color: rgba(148, 163, 184, 0.72) !important;
+}
+
+option {
+  background: #18181b;
+  color: #f8fafc;
+  padding: 0.55rem;
+}
+
+button {
+  border: 0;
+  transition:
+    transform 180ms ease,
+    box-shadow 180ms ease,
+    opacity 180ms ease,
+    filter 180ms ease;
+}
+
+button:not(:disabled):hover {
+  transform: translateY(-1px);
+  filter: brightness(1.03);
+}
+
+button:not(:disabled):active {
+  transform: translateY(0);
+}
+
+/* Theme tokens. Each theme only changes variables; component styles reuse them. */
+.min-h-screen {
+  position: relative;
+  isolation: isolate;
+  width: 100vw;
+  min-height: 100vh !important;
+  overflow-x: hidden;
+  --court-bg-a: #07110f;
+  --court-bg-b: #111827;
+  --court-bg-c: #18181b;
+  --court-panel-a: rgba(39, 39, 42, 0.9);
+  --court-panel-b: rgba(24, 24, 27, 0.86);
+  --court-card: rgba(39, 39, 42, 0.72);
+  --court-border: rgba(148, 163, 184, 0.18);
+  --court-accent: #2dd4bf;
+  --court-accent-2: #a3e635;
+  --court-accent-3: #f472b6;
+  --court-ink: #052e2b;
+  --court-glow: rgba(45, 212, 191, 0.24);
+  --court-focus: rgba(45, 212, 191, 0.16);
+  --court-line: rgba(255, 255, 255, 0.035);
+  --court-marking: rgba(255, 255, 255, 0.16);
+  --court-ball: rgba(190, 242, 100, 0.72);
+  --court-art-opacity: 0.62;
+  background:
+    radial-gradient(circle at top left, color-mix(in srgb, var(--court-accent) 24%, transparent), transparent 34rem),
+    radial-gradient(circle at 85% 12%, color-mix(in srgb, var(--court-accent-3) 18%, transparent), transparent 28rem),
+    linear-gradient(135deg, var(--court-bg-a) 0%, var(--court-bg-b) 46%, var(--court-bg-c) 100%) !important;
+  transition: background 260ms ease;
+}
+
+.theme-rg-clay {
+  --court-bg-a: #24110d;
+  --court-bg-b: #5b2418;
+  --court-bg-c: #15100e;
+  --court-panel-a: rgba(67, 31, 23, 0.9);
+  --court-panel-b: rgba(28, 19, 17, 0.88);
+  --court-card: rgba(79, 38, 27, 0.68);
+  --court-border: rgba(253, 186, 116, 0.2);
+  --court-accent: #f97316;
+  --court-accent-2: #facc15;
+  --court-accent-3: #38bdf8;
+  --court-ink: #2a1207;
+  --court-glow: rgba(249, 115, 22, 0.3);
+  --court-focus: rgba(249, 115, 22, 0.18);
+  --court-line: rgba(254, 215, 170, 0.052);
+  --court-marking: rgba(255, 237, 213, 0.18);
+  --court-ball: rgba(250, 204, 21, 0.7);
+}
+
+.theme-wimbledon {
+  --court-bg-a: #07130b;
+  --court-bg-b: #18472a;
+  --court-bg-c: #2b1642;
+  --court-panel-a: rgba(12, 42, 24, 0.91);
+  --court-panel-b: rgba(20, 21, 24, 0.87);
+  --court-card: rgba(17, 55, 31, 0.68);
+  --court-border: rgba(216, 180, 254, 0.2);
+  --court-accent: #22c55e;
+  --court-accent-2: #f8fafc;
+  --court-accent-3: #c084fc;
+  --court-ink: #052e16;
+  --court-glow: rgba(34, 197, 94, 0.28);
+  --court-focus: rgba(192, 132, 252, 0.18);
+  --court-line: rgba(240, 253, 244, 0.048);
+  --court-marking: rgba(255, 255, 255, 0.18);
+  --court-ball: rgba(216, 180, 254, 0.68);
+}
+
+.theme-hard-blue {
+  --court-bg-a: #06152c;
+  --court-bg-b: #0f4c81;
+  --court-bg-c: #101827;
+  --court-panel-a: rgba(15, 39, 70, 0.91);
+  --court-panel-b: rgba(13, 20, 35, 0.88);
+  --court-card: rgba(20, 55, 95, 0.66);
+  --court-border: rgba(125, 211, 252, 0.22);
+  --court-accent: #38bdf8;
+  --court-accent-2: #fbbf24;
+  --court-accent-3: #818cf8;
+  --court-ink: #06152c;
+  --court-glow: rgba(56, 189, 248, 0.3);
+  --court-focus: rgba(56, 189, 248, 0.18);
+  --court-line: rgba(219, 234, 254, 0.052);
+  --court-marking: rgba(219, 234, 254, 0.18);
+  --court-ball: rgba(251, 191, 36, 0.72);
+}
+
+.theme-night-neon {
+  --court-bg-a: #130622;
+  --court-bg-b: #2e1065;
+  --court-bg-c: #020617;
+  --court-panel-a: rgba(41, 20, 72, 0.91);
+  --court-panel-b: rgba(6, 12, 27, 0.88);
+  --court-card: rgba(49, 24, 90, 0.66);
+  --court-border: rgba(244, 114, 182, 0.24);
+  --court-accent: #f472b6;
+  --court-accent-2: #22d3ee;
+  --court-accent-3: #a3e635;
+  --court-ink: #21081b;
+  --court-glow: rgba(244, 114, 182, 0.31);
+  --court-focus: rgba(34, 211, 238, 0.18);
+  --court-line: rgba(250, 232, 255, 0.046);
+  --court-marking: rgba(224, 242, 254, 0.17);
+  --court-ball: rgba(163, 230, 53, 0.72);
+}
+
+/* Decorative court texture and court-line artwork behind the dashboard. */
+.min-h-screen::before {
+  content: "";
+  position: fixed;
+  inset: 0;
+  z-index: -1;
+  pointer-events: none;
+  background-image:
+    linear-gradient(var(--court-line) 1px, transparent 1px),
+    linear-gradient(90deg, var(--court-line) 1px, transparent 1px);
+  background-size: 48px 48px;
+  mask-image: linear-gradient(to bottom, rgba(0, 0, 0, 0.62), transparent 74%);
+}
+
+.min-h-screen::after {
+  content: "";
+  position: fixed;
+  inset: 0;
+  z-index: -1;
+  pointer-events: none;
+  opacity: var(--court-art-opacity);
+  background:
+    radial-gradient(circle at 9% 80%, var(--court-ball) 0 2.4rem, transparent 2.45rem),
+    radial-gradient(circle at 9% 80%, transparent 0 1.05rem, rgba(255, 255, 255, 0.58) 1.08rem 1.16rem, transparent 1.2rem),
+    linear-gradient(var(--court-marking) 0 0) 72% 50% / min(58rem, 62vw) 2px no-repeat,
+    linear-gradient(90deg, var(--court-marking) 0 0) 72% 50% / 2px min(32rem, 54vh) no-repeat,
+    linear-gradient(var(--court-marking) 0 0) 72% calc(50% - min(15rem, 25vh)) / min(58rem, 62vw) 2px no-repeat,
+    linear-gradient(var(--court-marking) 0 0) 72% calc(50% + min(15rem, 25vh)) / min(58rem, 62vw) 2px no-repeat,
+    linear-gradient(90deg, var(--court-marking) 0 0) calc(72% - min(29rem, 31vw)) 50% / 2px min(32rem, 54vh) no-repeat,
+    linear-gradient(90deg, var(--court-marking) 0 0) calc(72% + min(29rem, 31vw)) 50% / 2px min(32rem, 54vh) no-repeat,
+    radial-gradient(ellipse at 78% 55%, color-mix(in srgb, var(--court-accent) 20%, transparent), transparent 42rem);
+  filter: blur(0.1px);
+  transform: rotate(-6deg) scale(1.08);
+}
+
+.max-w-7xl {
+  max-width: 1640px !important;
+  min-height: calc(100vh - 3rem);
+  animation: page-in 520ms ease both;
+}
+
+/* Glassy panels layered on top of the themed court background. */
+.rounded-3xl {
+  border-radius: 22px !important;
+  background:
+    linear-gradient(180deg, var(--court-panel-a), var(--court-panel-b)) !important;
+  border-color: var(--court-border) !important;
+  box-shadow:
+    0 24px 70px rgba(0, 0, 0, 0.34),
+    inset 0 1px 0 rgba(255, 255, 255, 0.05);
+  backdrop-filter: blur(18px);
+}
+
+.rounded-3xl:first-child {
+  overflow: hidden;
+  position: relative;
+}
+
+.rounded-3xl:first-child::after {
+  content: "";
+  position: absolute;
+  inset: auto 0 0;
+  height: 3px;
+  background: linear-gradient(90deg, var(--court-accent), var(--court-accent-2), var(--court-accent-3));
+}
+
+.header-actions {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  justify-content: flex-end;
+  gap: 0.75rem;
+}
+
+.theme-picker {
+  display: grid;
+  gap: 0.35rem;
+  min-width: 13rem;
+}
+
+.theme-picker span {
+  color: rgba(244, 244, 245, 0.72);
+  font-size: 0.78rem;
+  font-weight: 700;
+  text-transform: uppercase;
+}
+
+.theme-picker select {
+  min-height: 2.45rem;
+  border: 1px solid var(--court-border);
+  border-radius: 999px;
+  background:
+    linear-gradient(135deg, color-mix(in srgb, var(--court-accent) 18%, transparent), rgba(24, 24, 27, 0.72));
+  padding: 0.55rem 2.15rem 0.55rem 0.9rem;
+  color: #ffffff;
+  box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.05);
+}
+
+/* Clickable player search results replace the fragile native multi-select. */
+.player-picker {
+  display: grid;
+  gap: 0.35rem;
+}
+
+.selected-player {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 0.5rem;
+  width: fit-content;
+  max-width: 100%;
+  border: 1px solid color-mix(in srgb, var(--court-accent) 42%, transparent);
+  border-radius: 999px;
+  background: color-mix(in srgb, var(--court-accent) 16%, transparent);
+  padding: 0.4rem 0.75rem;
+  color: #ffffff;
+  font-size: 0.86rem;
+}
+
+.selected-player span {
+  color: rgba(244, 244, 245, 0.68);
+  font-size: 0.72rem;
+  font-weight: 800;
+  text-transform: uppercase;
+}
+
+.selected-player strong {
+  min-width: 0;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+.player-results {
+  display: grid;
+  gap: 0.45rem;
+  max-height: 15.5rem;
+  overflow: auto;
+  padding: 0.25rem;
+  scrollbar-color: var(--court-accent) transparent;
+}
+
+.player-result {
+  display: grid;
+  grid-template-columns: 4.5rem minmax(0, 1fr);
+  align-items: center;
+  gap: 0.65rem;
+  width: 100%;
+  border: 1px solid var(--court-border);
+  border-radius: 12px;
+  background: color-mix(in srgb, var(--court-card) 84%, transparent);
+  padding: 0.7rem 0.8rem;
+  color: #f8fafc;
+  text-align: left;
+}
+
+.player-result span {
+  color: color-mix(in srgb, var(--court-accent-2) 88%, #ffffff);
+  font-size: 0.82rem;
+  font-weight: 800;
+}
+
+.player-result strong {
+  min-width: 0;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+.player-result:hover,
+.player-result.is-active {
+  border-color: color-mix(in srgb, var(--court-accent) 68%, transparent);
+  background:
+    linear-gradient(135deg, color-mix(in srgb, var(--court-accent) 20%, transparent), color-mix(in srgb, var(--court-card) 78%, transparent));
+  box-shadow: 0 12px 24px rgba(0, 0, 0, 0.18);
+}
+
+.player-empty {
+  border: 1px dashed var(--court-border);
+  border-radius: 12px;
+  padding: 0.85rem;
+  color: #a1a1aa;
+  text-align: center;
+}
+
+.fixture-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  flex-wrap: wrap;
+  gap: 1rem;
+  margin-bottom: 1rem;
+}
+
+.fixture-header p {
+  margin: 0.25rem 0 0;
+  color: #a1a1aa;
+}
+
+.fixture-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(17rem, 1fr));
+  gap: 0.8rem;
+  max-height: 22rem;
+  overflow: auto;
+  padding: 0.15rem;
+}
+
+.fixture-card {
+  display: grid;
+  gap: 0.35rem;
+  min-height: 9.5rem;
+  border: 1px solid var(--court-border);
+  border-radius: 16px;
+  background:
+    linear-gradient(135deg, color-mix(in srgb, var(--court-accent) 12%, transparent), color-mix(in srgb, var(--court-card) 86%, transparent));
+  padding: 1rem;
+  color: #f8fafc;
+  text-align: left;
+}
+
+.fixture-card span {
+  width: fit-content;
+  border-radius: 999px;
+  background: color-mix(in srgb, var(--court-accent-2) 22%, transparent);
+  padding: 0.22rem 0.55rem;
+  color: color-mix(in srgb, var(--court-accent-2) 90%, #ffffff);
+  font-size: 0.75rem;
+  font-weight: 800;
+}
+
+.fixture-card strong {
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+.fixture-card em {
+  color: #a1a1aa;
+  font-size: 0.78rem;
+  font-style: normal;
+  font-weight: 800;
+  text-transform: uppercase;
+}
+
+.fixture-card:hover {
+  border-color: color-mix(in srgb, var(--court-accent) 68%, transparent);
+  box-shadow: 0 14px 30px rgba(0, 0, 0, 0.22);
+}
+
+.fixture-pick {
+  margin-top: 0.4rem;
+  border-top: 1px solid var(--court-border);
+  padding-top: 0.65rem;
+  color: #86efac;
+  font-size: 0.88rem;
+  font-weight: 750;
+}
+
+.fixture-error {
+  margin-top: 0.4rem;
+  border-top: 1px solid rgba(248, 113, 113, 0.28);
+  padding-top: 0.65rem;
+  color: #fca5a5;
+  font-size: 0.82rem;
+}
+
+/* Tailwind utility overrides used by the existing JSX. */
+h1,
+h2 {
+  letter-spacing: 0;
+}
+
+h1 {
+  color: #ffffff;
+  text-wrap: balance;
+}
+
+h2 {
+  color: #f4f4f5;
+}
+
+label {
+  font-weight: 650;
+  color: #d4d4d8 !important;
+}
+
+.bg-zinc-800 {
+  background-color: var(--court-card) !important;
+}
+
+.border-zinc-700 {
+  border-color: var(--court-border) !important;
+}
+
+.rounded-xl,
+.rounded-2xl {
+  box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.04);
+}
+
+.rounded-xl {
+  border-radius: 12px !important;
+}
+
+.rounded-2xl {
+  border-radius: 16px !important;
+}
+
+.bg-white.text-black {
+  color: var(--court-ink) !important;
+  background: linear-gradient(135deg, var(--court-accent-2), var(--court-accent)) !important;
+  box-shadow: 0 16px 36px var(--court-glow);
+}
+
+.bg-white.text-black:disabled {
+  box-shadow: none;
+}
+
+.bg-green-900 {
+  background: rgba(20, 83, 45, 0.55) !important;
+}
+
+.bg-red-900,
+.bg-red-950 {
+  background: rgba(127, 29, 29, 0.42) !important;
+}
+
+.text-green-400 {
+  color: #86efac !important;
+}
+
+.text-yellow-400 {
+  color: #fde68a !important;
+}
+
+.w-full.bg-zinc-800.rounded-full {
+  height: 0.9rem !important;
+  background: rgba(9, 9, 11, 0.72) !important;
+  box-shadow:
+    inset 0 1px 5px rgba(0, 0, 0, 0.7),
+    0 1px 0 rgba(255, 255, 255, 0.04);
+}
+
+.bg-white.h-5 {
+  background: linear-gradient(90deg, var(--court-accent), var(--court-accent-2)) !important;
+  box-shadow: 0 0 18px var(--court-glow);
+}
+
+.bg-zinc-500.h-5 {
+  background: linear-gradient(90deg, #94a3b8, var(--court-accent-3)) !important;
+  box-shadow: 0 0 18px color-mix(in srgb, var(--court-accent-3) 34%, transparent);
+}
+
+.text-zinc-500.text-center,
+.text-zinc-400.text-center {
+  min-height: 16rem;
+  display: grid;
+  place-items: center;
+  border: 1px dashed rgba(148, 163, 184, 0.18);
+  border-radius: 18px;
+  background:
+    linear-gradient(135deg, color-mix(in srgb, var(--court-accent) 9%, transparent), rgba(24, 24, 27, 0.38));
+}
+
+@keyframes page-in {
+  from {
+    opacity: 0;
+    transform: translateY(10px);
+  }
+
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+@media (max-width: 720px) {
+  .p-6 {
+    padding: 1rem !important;
+  }
+
+  .p-8 {
+    padding: 1.35rem !important;
+  }
+
+  .text-4xl {
+    font-size: 2rem !important;
+    line-height: 1.1 !important;
+  }
+
+  .grid-cols-2 {
+    grid-template-columns: 1fr !important;
+  }
+
+  .text-right {
+    text-align: left !important;
+  }
+
+  .header-actions {
+    align-items: stretch;
+    justify-content: flex-start;
+    width: 100%;
+  }
+
+  .theme-picker {
+    width: 100%;
+  }
+
+  .fixture-header button {
+    width: 100%;
+  }
+}

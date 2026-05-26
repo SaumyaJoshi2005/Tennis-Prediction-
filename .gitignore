@@ -3,52 +3,36 @@ __pycache__/
 *.py[cod]
 *.pyo
 *.pyd
-*.env
-.env.*
 venv/
 .venv/
+*.sqlite
 
-# Docker / local config
-docker-compose.override.yml
-*.local
-
-# VS Code
-.vscode/
+# Environment
+.env
+.env.*
 
 # Logs
 *.log
 
-# Mac
-.DS_Store
-
-# Node / frontend build
+# Node
+node_modules/
 pred_model/node_modules/
+build/
 pred_model/build/
 
-# Database
-*.sqlite
-
-# OS generated files
+# OS
+.DS_Store
 Thumbs.db
 
-# Temporary files
+# Temporary
 *.tmp
 *.swp
-*~
 
-# Data sets
-# Ignore CSV datasets (avoid committing large raw data files)
-*.csv
+# ML models
+*.pkl
+*.joblib
+*.h5
+*.pt
 
-# But keep these important project CSVs used by the code/database
-!/all_combined_engineered_symmetric.csv
-!/all_combined_engineered_symmetric_with_rg2026_fixtures.csv
-!/all_combined.csv
-!/all_combined_engineered.csv
-!/ml_ready_tennis.csv
-!/master_tennis_dataset.csv
-!/roland_garros_2026_fixtures_engineered_symmetric.csv
-!/roland_garros_2026_ml_dataset.csv
-!/roland_garros_2026_players.csv
-!/roland_garros_2026_player_fitness.csv
-!/roland_garros_2026_round1_model_format.csv
+# Ignore compiled python
+*.pyc
