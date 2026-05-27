@@ -1,0 +1,36 @@
+# Dockerfile
+# ===========
+# FIXES APPLIED
+# -------------
+# 1. Added .dockerignore recommendation — COPY . . was pulling in
+#    your local CSVs (150k rows), model pkl files, and __pycache__
+#    making the image unnecessarily large.
+#
+# 2. CMD now uses 'main:app' (root-level) not 'app.main:app'
+#    since main.py sits at the project root, not inside an /app package.
+#    Adjust this if your project structure nests everything under /app.
+#
+# 3. System deps added for mysql-connector — the Python package needs
+#    libmysqlclient which isn't in the slim base image.
+
+FROM python:3.11-slim
+
+# Install system deps required by mysql-connector-python
+RUN apt-get update && apt-get install -y \
+    gcc \
+    default-libmysqlclient-dev \
+    pkg-config \
+    && rm -rf /var/lib/apt/lists/*
+
+WORKDIR /app
+
+# Copy requirements first — layer cache means pip only reruns on changes
+COPY requirements.txt .
+RUN pip install --no-cache-dir -r requirements.txt
+
+# Copy source (CSV data + notebooks excluded via .dockerignore)
+COPY . .
+
+# FIX 2: main:app matches root-level main.py
+# Use 1 worker per container; scale horizontally via compose replicas
+CMD ["uvicorn", "main:app", "--host", "0.0.0.0", "--port", "8000", "--workers", "1"]
