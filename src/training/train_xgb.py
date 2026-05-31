@@ -136,7 +136,24 @@ def main():
         X_train,
         y_train
     )
+    
+    import os
+    import joblib
 
+    os.makedirs("models", exist_ok=True)
+
+    joblib.dump(
+        model,
+        "models/xgb_model.pkl"
+    )
+
+    joblib.dump(
+        FEATURES,
+        "models/features.pkl"
+    )
+
+    print("Model saved successfully.")
+    
     pred_probs = model.predict_proba(
         X_test
     )[:, 1]
@@ -199,3 +216,6 @@ def main():
 
 if __name__ == "__main__":
     main()
+    
+# %%
+    
