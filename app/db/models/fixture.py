@@ -19,6 +19,7 @@ from app.db.base import Base
 
 
 class Fixture(Base):
+
     __tablename__ = "fixtures"
 
     fixture_id = Column(
@@ -29,26 +30,45 @@ class Fixture(Base):
 
     player_a_id = Column(
         Integer,
-        ForeignKey("players.player_id")
+        ForeignKey(
+            "players.player_id"
+        )
     )
 
     player_b_id = Column(
         Integer,
-        ForeignKey("players.player_id")
+        ForeignKey(
+            "players.player_id"
+        )
     )
 
-    tournament = Column(Text)
+    tournament = Column(
+        Text
+    )
 
-    round = Column(Text)
+    round = Column(
+        Text
+    )
 
-    surface = Column(Text)
+    surface = Column(
+        Text
+    )
 
-    match_date = Column(Date)
+    match_date = Column(
+        Date
+    )
 
-    prediction = Column(Float)
+    # Model output probability
+    player_a_win_probability = Column(
+        Float
+    )
 
-    winner_predicted = Column(Text)
-    
-    player_a_win_probability = Column(Float)
-    
-    status = Column(Text)
+    # Predicted winner name
+    winner_predicted = Column(
+        Text
+    )
+
+    status = Column(
+        Text,
+        default="SCHEDULED"
+    )
