@@ -29,7 +29,7 @@ FEATURES=[
     "surface_winrate_diff",
     "matches_last_7d_diff",
     ##"minutes_last_14d_diff",-> no data available ie all values are 0 ...
-    "days_since_last_match_diff",
+    ##"days_since_last_match_diff",
     "h2h_diff"
 ]
 

@@ -1,26 +1,52 @@
 # Python
-__pycache__/
+
+**pycache**/
 *.pyc
 
 # Virtual Environments
+
 venv/
 .venv/
 
 # Environment Variables
+
 .env
+backend/.env
+
+# Windows
+
 desktop.ini
+Thumbs.db
+
 # Datasets
+
 data/
 
 # Models
+
 models/*.pkl
 
+# Node
+
+backend/node_modules/
+
+# Archives
+
+*.zip
+
 # IDE
+
 .vscode/
 .idea/
 
 # Jupyter
+
 .ipynb_checkpoints/
 
 # Logs
+
 *.log
+
+# Temporary/Test Files
+
+espn_sample.json

@@ -1,0 +1,16 @@
+.players-page {
+  text-align: center;
+  padding: 3rem;
+  background: white;
+  border-radius: 8px;
+}
+
+.players-page h1 {
+  color: #1a73e8;
+  margin-bottom: 1rem;
+}
+
+.players-page p {
+  color: #666;
+  font-size: 1.1rem;
+}

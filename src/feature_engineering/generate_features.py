@@ -98,7 +98,13 @@ def main():
         )
 
         print(f"Matches loaded: {len(matches)}")
+        
+        print("Clearing old feature rows...")
 
+        db.query(MatchFeatures).delete()
+
+        db.commit()
+        
         player_elo = defaultdict(lambda: INITIAL_ELO)
 
         surface_elo = defaultdict(
@@ -307,21 +313,11 @@ def main():
             surface_elo[loser_id][surface] = (
                 new_loser_surface_elo
             )
-            if processed < 20:
-                print("minutes =", getattr(match, "minutes", "NO_ATTR"))
             minutes = None
 
             if hasattr(match, "minutes"):
                 minutes = match.minutes
-            if processed < 20:
-                print(
-                current_date,
-                winner_id,
-                loser_id,
-                minutes
-            )
-            if processed >= 20:
-                break
+                
             recent_results[winner_id].append(
                 (current_date, 1, surface, minutes)
             )

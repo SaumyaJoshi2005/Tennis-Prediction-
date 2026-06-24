@@ -1,0 +1,39 @@
+.fixtures-page h1 {
+  color: #1a73e8;
+  margin-bottom: 2rem;
+}
+
+.fixtures-list {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+  gap: 2rem;
+}
+
+.fixture-card {
+  background: white;
+  padding: 1.5rem;
+  border-radius: 8px;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+  transition: transform 0.2s;
+}
+
+.fixture-card:hover {
+  transform: translateY(-4px);
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
+}
+
+.fixture-card h3 {
+  color: #1a73e8;
+  margin-bottom: 1rem;
+  border-bottom: 2px solid #1a73e8;
+  padding-bottom: 0.5rem;
+}
+
+.fixture-card p {
+  margin: 0.5rem 0;
+  color: #555;
+}
+
+.fixture-card p strong {
+  color: #333;
+}

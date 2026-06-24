@@ -30,8 +30,8 @@ FEATURES = [
     "surface_elo_diff",
     "recent_form_diff",
     "surface_winrate_diff",
-    "matches_last_7d_diff",
-    "days_since_last_match_diff",
+    #"matches_last_7d_diff",
+    #"days_since_last_match_diff",
     "h2h_diff"
 ]
 
