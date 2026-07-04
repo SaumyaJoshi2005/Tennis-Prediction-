@@ -5,10 +5,10 @@ import 'express-async-errors';
 import dotenv from 'dotenv';
 
 import predictionsRouter from './routes/predictions.js';
+import fixturesRouter from './routes/fixtures.js';
+import playersRouter from './routes/players.js';
 
 // Future routes
-// import fixturesRouter from './routes/fixtures.js';
-// import playersRouter from './routes/players.js';
 
 import errorHandler from './middleware/errorHandler.js';
 
@@ -21,10 +21,10 @@ const PORT = process.env.PORT || 5000;
 // Middleware
 
 app.use(cors({
-origin:
-process.env.CORS_ORIGIN
-|| 'http://localhost:5173',
-credentials: true
+  origin:
+    process.env.CORS_ORIGIN
+    || 'http://localhost:5173',
+  credentials: true
 }));
 
 app.use(morgan('combined'));
@@ -32,69 +32,67 @@ app.use(morgan('combined'));
 app.use(express.json());
 
 app.use(express.urlencoded({
-extended: true
+  extended: true
 }));
 
 // Health Check
 
 app.get(
-'/api/health',
-(req, res) => {
+  '/api/health',
+  (req, res) => {
 
 
-res.json({
+    res.json({
 
-  status: 'ok',
+      status: 'ok',
 
-  timestamp:
-    new Date()
-    .toISOString(),
+      timestamp:
+        new Date()
+          .toISOString(),
 
-  uptime:
-    process.uptime()
-});
+      uptime:
+        process.uptime()
+    });
 
 
-}
+  }
 );
 
 // Routes
 
 app.use(
-'/api/predictions',
-predictionsRouter
+  '/api/predictions',
+  predictionsRouter
 );
 
-// Future routes
+app.use(
+  '/api/fixtures',
+  fixturesRouter
+);
 
-// app.use(
-//   '/api/fixtures',
-//   fixturesRouter
-// );
-
-// app.use(
-//   '/api/players',
-//   playersRouter
-// );
+app.use(
+  '/api/players',
+  playersRouter
+);
 
 // 404
 
 app.use((req, res) => {
 
-res.status(404).json({
+  res.status(404).json({
 
 
-error:
-  'Route not found',
+    error:
+      'Route not found',
 
-path:
-  req.path,
+    path:
+      req.path,
 
-method:
-  req.method
+    method:
+      req.method
 
 
-});
+  });
 });
 
 // Error Handler
@@ -104,23 +102,22 @@ app.use(errorHandler);
 // Start Server
 
 app.listen(
-PORT,
-() => {
+  PORT,
+  () => {
 
 
-console.log(
-  `Backend server running on http://localhost:${PORT}`
-);
+    console.log(
+      `Backend server running on http://localhost:${PORT}`
+    );
 
-console.log(
-  `Environment: ${
-    process.env.NODE_ENV
-    || 'development'
-  }`
-);
+    console.log(
+      `Environment: ${process.env.NODE_ENV
+      || 'development'
+      }`
+    );
 
 
-}
+  }
 );
 
 export default app;

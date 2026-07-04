@@ -50,3 +50,12 @@ backend/node_modules/
 # Temporary/Test Files
 
 espn_sample.json
+# Node
+node_modules/
+frontend/node_modules/
+backend/node_modules/
+
+# npm
+package-lock.json
+frontend/package-lock.json
+backend/package-lock.json

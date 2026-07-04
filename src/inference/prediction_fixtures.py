@@ -13,6 +13,10 @@ from app.db.models.player import (
 from src.inference.predict_players import (
     predict_players
 )
+from src.utils.fixture_lifecycle import (
+    mark_stale_fixtures,
+    prediction_candidate_filter
+)
 
 
 def predict_all_fixtures():
@@ -24,17 +28,21 @@ def predict_all_fixtures():
 
     try:
 
+        stale_count = mark_stale_fixtures(db)
+
         fixtures = (
             db.query(Fixture)
-            .filter(
-                Fixture.status == "SCHEDULED"
-            )
+            .filter(prediction_candidate_filter())
             .all()
         )
 
         print(
             f"Fixtures found: "
             f"{len(fixtures)}"
+        )
+        print(
+            f"Stale fixtures marked: "
+            f"{stale_count}"
         )
 
         for fixture in fixtures:

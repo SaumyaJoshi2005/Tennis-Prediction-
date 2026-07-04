@@ -1,16 +1,72 @@
 .players-page {
-  text-align: center;
-  padding: 3rem;
-  background: white;
-  border-radius: 8px;
+  display: grid;
+  gap: 1.5rem;
 }
 
-.players-page h1 {
-  color: #1a73e8;
-  margin-bottom: 1rem;
+.player-toolbar {
+  align-items: end;
+  backdrop-filter: blur(18px);
+  background: rgba(255, 255, 255, 0.1);
+  border: 1px solid var(--line);
+  border-radius: 20px;
+  display: grid;
+  gap: 1rem;
+  grid-template-columns: minmax(0, 1fr) 220px;
+  padding: 1rem;
 }
 
-.players-page p {
-  color: #666;
-  font-size: 1.1rem;
+.player-toolbar label {
+  color: var(--text-muted);
+  display: grid;
+  font-size: 0.78rem;
+  font-weight: 900;
+  gap: 0.35rem;
+  text-transform: uppercase;
+}
+
+.player-toolbar input,
+.player-toolbar select {
+  background: rgba(3, 15, 26, 0.7);
+  border: 1px solid var(--line);
+  border-radius: 12px;
+  color: var(--text-main);
+  font: inherit;
+  min-width: 0;
+  padding: 0.8rem 0.9rem;
+  text-transform: none;
+}
+
+.player-toolbar input:focus,
+.player-toolbar select:focus {
+  border-color: var(--line-strong);
+  box-shadow: 0 0 0 3px rgba(var(--accent-rgb), 0.14);
+  outline: none;
+}
+
+.players-grid {
+  display: grid;
+  gap: 1.2rem;
+  grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+}
+
+.pagination {
+  align-items: center;
+  display: flex;
+  gap: 1rem;
+  justify-content: center;
+}
+
+.pagination span {
+  color: var(--text-muted);
+  font-weight: 900;
+}
+
+@media (max-width: 720px) {
+  .player-toolbar {
+    grid-template-columns: 1fr;
+  }
+
+  .players-grid {
+    grid-template-columns: 1fr;
+  }
 }

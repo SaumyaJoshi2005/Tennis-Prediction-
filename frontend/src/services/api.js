@@ -1,50 +1,51 @@
 import axios from 'axios'
 
-const API_BASE_URL = process.env.REACT_APP_API_URL || '/api'
-
 const api = axios.create({
-  baseURL: API_BASE_URL,
+  baseURL:
+    import.meta.env.VITE_API_URL ||
+    'http://localhost:5000/api',
+
   headers: {
     'Content-Type': 'application/json',
   },
+
+  timeout: 10000,
 })
 
 export const predictions = {
-  getPrediction: (playerId1, playerId2) =>
-    api.post('/predictions', {
-      player_a_id: playerId1,
-      player_b_id: playerId2,
-    }),
-  
-  batchPredictions: (matches) =>
-    api.post('/predictions/batch', { matches }),
+
+  getToday() {
+
+    return api.get(
+      '/predictions/today'
+    )
+
+  }
+
 }
 
 export const fixtures = {
-  getUpcoming: (limit = 10) =>
-    api.get(`/fixtures?limit=${limit}&status=UPCOMING`),
-  
-  getAll: () =>
-    api.get('/fixtures'),
+
+  getAll() {
+
+    return api.get(
+      '/fixtures'
+    )
+
+  }
+
 }
 
 export const players = {
-  getAll: () =>
-    api.get('/players'),
-  
-  getById: (id) =>
-    api.get(`/players/${id}`),
-  
-  getStats: (id) =>
-    api.get(`/players/${id}/stats`),
-}
 
-export const matches = {
-  getAll: () =>
-    api.get('/matches'),
-  
-  getById: (id) =>
-    api.get(`/matches/${id}`),
+  getAll() {
+
+    return api.get(
+      '/players'
+    )
+
+  }
+
 }
 
 export default api

@@ -1,0 +1,146 @@
+.fixture-card {
+    backdrop-filter: blur(18px);
+    background: linear-gradient(145deg, rgba(255, 255, 255, 0.14), rgba(255, 255, 255, 0.08));
+    border: 1px solid var(--line);
+    border-radius: 22px;
+    box-shadow: var(--shadow-card);
+    display: grid;
+    gap: 1.15rem;
+    padding: 1.2rem;
+    transition: transform 0.2s ease, border-color 0.2s ease;
+}
+
+.fixture-card:hover {
+    border-color: var(--line-strong);
+    transform: translateY(-4px);
+}
+
+.fixture-card-header {
+    align-items: flex-start;
+    display: flex;
+    gap: 1rem;
+    justify-content: space-between;
+}
+
+.fixture-card-header h3 {
+    color: var(--text-main);
+    font-size: 1.05rem;
+    margin: 0 0 0.35rem;
+}
+
+.fixture-card-header p {
+    color: var(--text-muted);
+    font-size: 0.9rem;
+    margin: 0;
+}
+
+.fixture-matchup {
+    align-items: center;
+    display: grid;
+    gap: 0.75rem;
+    grid-template-columns: 1fr auto 1fr;
+    text-align: center;
+}
+
+.fixture-matchup div {
+    align-items: center;
+    display: grid;
+    gap: 0.55rem;
+    justify-items: center;
+}
+
+.fixture-matchup strong {
+    align-items: center;
+    color: var(--text-main);
+    display: flex;
+    gap: 0.35rem;
+    justify-content: center;
+    min-width: 0;
+}
+
+.fixture-matchup span {
+    color: var(--text-muted);
+    font-size: 0.8rem;
+    font-weight: 900;
+    text-transform: uppercase;
+}
+
+.fixture-meta {
+    border-top: 1px solid var(--line);
+    display: grid;
+    gap: 0.75rem;
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    margin: 0;
+    padding-top: 1rem;
+}
+
+.fixture-flag {
+    border-radius: 2px;
+    height: 12px;
+    object-fit: cover;
+    width: 18px;
+}
+
+.fixture-scoreboard {
+    background: rgba(255, 255, 255, 0.09);
+    border: 1px solid var(--line);
+    border-radius: 16px;
+    display: grid;
+    gap: 0.55rem;
+    padding: 0.9rem;
+}
+
+.fixture-scoreboard div {
+    align-items: center;
+    display: flex;
+    gap: 1rem;
+    justify-content: space-between;
+}
+
+.fixture-scoreboard span {
+    color: var(--text-muted);
+    font-size: 0.9rem;
+    font-weight: 800;
+}
+
+.fixture-scoreboard strong {
+    color: var(--text-main);
+    font-size: 1rem;
+    letter-spacing: 0.08em;
+    white-space: nowrap;
+}
+
+.fixture-meta dt {
+    color: var(--text-muted);
+    font-size: 0.78rem;
+    font-weight: 900;
+    text-transform: uppercase;
+}
+
+.fixture-meta dd {
+    color: var(--accent-2);
+    font-weight: 900;
+    margin: 0.25rem 0 0;
+}
+
+.fixture-result {
+    background: rgba(var(--accent-rgb), 0.12);
+    border: 1px solid var(--line-strong);
+    border-radius: 16px;
+    display: grid;
+    gap: 0.25rem;
+    padding: 0.95rem;
+}
+
+.fixture-result span,
+.fixture-result small {
+    color: var(--text-muted);
+    font-size: 0.8rem;
+    font-weight: 900;
+    text-transform: uppercase;
+}
+
+.fixture-result strong {
+    color: var(--accent-2);
+    font-size: 1.05rem;
+}

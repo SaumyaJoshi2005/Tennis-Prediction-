@@ -1,0 +1,65 @@
+.how-page {
+  display: grid;
+  gap: 1.5rem;
+}
+
+.model-flow {
+  display: grid;
+  gap: 1rem;
+  grid-template-columns: repeat(4, minmax(0, 1fr));
+}
+
+.model-flow article,
+.feature-board {
+  backdrop-filter: blur(18px);
+  background: linear-gradient(145deg, rgba(255, 255, 255, 0.14), rgba(255, 255, 255, 0.08));
+  border: 1px solid var(--line);
+  border-radius: 22px;
+  box-shadow: var(--shadow-card);
+  padding: 1.25rem;
+}
+
+.model-flow article > span {
+  color: var(--accent-2);
+  font-size: 0.8rem;
+  font-weight: 900;
+}
+
+.model-flow h2,
+.feature-board h2 {
+  color: var(--text-main);
+  margin: 0.5rem 0;
+}
+
+.model-flow p {
+  color: var(--text-muted);
+  line-height: 1.65;
+}
+
+.feature-board {
+  display: grid;
+  gap: 1rem;
+  grid-template-columns: 0.8fr 1.2fr;
+}
+
+.feature-board ul {
+  display: grid;
+  gap: 0.75rem;
+  list-style: none;
+}
+
+.feature-board li {
+  background: rgba(255, 255, 255, 0.09);
+  border: 1px solid var(--line);
+  border-radius: 14px;
+  color: var(--text-muted);
+  font-weight: 800;
+  padding: 0.85rem;
+}
+
+@media (max-width: 920px) {
+  .model-flow,
+  .feature-board {
+    grid-template-columns: 1fr;
+  }
+}

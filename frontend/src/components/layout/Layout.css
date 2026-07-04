@@ -1,0 +1,69 @@
+.layout {
+    color: var(--text-main);
+    display: flex;
+    flex-direction: column;
+    min-height: 100vh;
+    position: relative;
+}
+
+.theme-hard {
+    --court-950: #071a2d;
+    --court-900: #0a2740;
+    --accent-1: #35d6b3;
+    --accent-2: #67f0d3;
+    --accent-rgb: 53, 214, 179;
+}
+
+.theme-clay {
+    --court-950: #25120d;
+    --court-900: #4a2116;
+    --court-800: #7d3920;
+    --accent-1: #f08a4b;
+    --accent-2: #ffd0a8;
+    --accent-rgb: 240, 138, 75;
+}
+
+.theme-grass {
+    --court-950: #071f16;
+    --court-900: #0d3928;
+    --court-800: #125336;
+    --accent-1: #94d75b;
+    --accent-2: #f4f1d2;
+    --accent-rgb: 148, 215, 91;
+}
+
+.theme-night {
+    --court-950: #050713;
+    --court-900: #11172d;
+    --court-800: #20284a;
+    --accent-1: #8f7dff;
+    --accent-2: #d9d3ff;
+    --accent-rgb: 143, 125, 255;
+}
+
+.layout::before {
+    background:
+        linear-gradient(rgba(255, 255, 255, 0.045) 1px, transparent 1px),
+        linear-gradient(90deg, rgba(255, 255, 255, 0.045) 1px, transparent 1px);
+    background-size: 58px 58px;
+    content: "";
+    inset: 0;
+    mask-image: linear-gradient(to bottom, rgba(0, 0, 0, 0.9), transparent 72%);
+    pointer-events: none;
+    position: fixed;
+}
+
+.layout-content {
+    flex: 1;
+    margin: 0 auto;
+    max-width: 1180px;
+    padding: 2.25rem 1.5rem 3rem;
+    position: relative;
+    width: 100%;
+}
+
+@media (max-width: 720px) {
+    .layout-content {
+        padding: 1.25rem 1rem 2rem;
+    }
+}

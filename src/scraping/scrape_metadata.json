@@ -1,0 +1,35 @@
+{
+  "first": {
+    "last_scraped": "2026-06-09T19:57:48.057019",
+    "fixture_count": 24
+  },
+  "second": {
+    "last_scraped": "2026-06-09T19:57:57.087952",
+    "fixture_count": 24
+  },
+  "third": {
+    "last_scraped": "2026-06-09T19:58:06.902028",
+    "fixture_count": 24
+  },
+  "fourth": {
+    "last_scraped": "2026-06-09T19:58:16.717068",
+    "fixture_count": 24
+  },
+  "quarterfinals": {
+    "last_scraped": "2026-06-09T19:58:26.513722",
+    "fixture_count": 24
+  },
+  "semifinals": {
+    "last_scraped": "2026-06-09T19:58:36.326589",
+    "fixture_count": 24
+  },
+  "final": {
+    "last_scraped": "2026-06-09T19:58:46.243335",
+    "fixture_count": 24
+  },
+  "_metadata": {
+    "description": "24-hour buffer tracking for RG draw scraping",
+    "buffer_hours": 24,
+    "last_updated": null
+  }
+}

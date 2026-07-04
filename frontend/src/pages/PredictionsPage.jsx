@@ -1,72 +1,126 @@
-import { useState } from 'react'
+import { useEffect, useState } from 'react'
+
 import { predictions } from '../services/api'
+
+import TournamentSection from '../components/prediction/TournamentSection'
+import LoadingSpinner from '../components/common/LoadingSpinner'
+import ErrorMessage from '../components/common/ErrorMessage'
+import EmptyState from '../components/common/EmptyState'
+import { getTournamentTier, sortByTournamentTier } from '../utils/helpers'
+
 import './PredictionsPage.css'
 
-export default function PredictionsPage() {
-  const [playerId1, setPlayerId1] = useState('')
-  const [playerId2, setPlayerId2] = useState('')
-  const [result, setResult] = useState(null)
-  const [loading, setLoading] = useState(false)
+function PredictionsPage() {
 
-  const handlePredict = async (e) => {
-    e.preventDefault()
-    if (!playerId1 || !playerId2) {
-      alert('Please enter both player IDs')
-      return
+    const [matches, setMatches] = useState([])
+
+    const [loading, setLoading] = useState(true)
+
+    const [error, setError] = useState(null)
+
+    useEffect(() => {
+
+        async function loadPredictions() {
+
+            try {
+
+                const response =
+                    await predictions.getToday()
+
+                setMatches(Array.isArray(response.data) ? response.data : [])
+
+            }
+
+            catch (err) {
+
+                console.error(err)
+
+                setError(
+                    'Unable to load predictions.'
+                )
+
+            }
+
+            finally {
+
+                setLoading(false)
+
+            }
+
+        }
+
+        loadPredictions()
+
+    }, [])
+
+    if (loading) {
+
+        return <LoadingSpinner />
+
     }
 
-    setLoading(true)
-    try {
-      const response = await predictions.getPrediction(playerId1, playerId2)
-      setResult(response.data)
-    } catch (error) {
-      console.error('Prediction error:', error)
-      alert('Error fetching prediction')
-    } finally {
-      setLoading(false)
+    if (error) {
+
+        return (
+
+            <ErrorMessage
+                message={error}
+            />
+
+        )
+
     }
-  }
 
-  return (
-    <div className="predictions-page">
-      <h1>Match Predictions</h1>
+    if (matches.length === 0) {
 
-      <form onSubmit={handlePredict} className="prediction-form">
-        <div className="form-group">
-          <label>Player A ID:</label>
-          <input
-            type="number"
-            value={playerId1}
-            onChange={(e) => setPlayerId1(e.target.value)}
-            placeholder="Enter player ID"
-          />
+        return (
+
+            <EmptyState
+                message="No predictions available."
+            />
+
+        )
+
+    }
+
+    const groupedMatches = [...matches].sort(sortByTournamentTier).reduce((groups, match) => {
+        const tournament = match.tournament || 'Tournament TBD'
+
+        return {
+            ...groups,
+            [tournament]: [...(groups[tournament] || []), match],
+        }
+    }, {})
+
+    return (
+
+        <div className="page">
+
+            <div className="page-header">
+                <div>
+                    <p className="section-eyebrow">Model output</p>
+                    <h1>Generated Predictions</h1>
+                </div>
+
+                <span>{matches.length} matches</span>
+            </div>
+
+            {Object.entries(groupedMatches)
+                .sort(([tournamentA], [tournamentB]) => (
+                    getTournamentTier(tournamentA).rank - getTournamentTier(tournamentB).rank
+                ))
+                .map(([tournament, tournamentMatches]) => (
+                <TournamentSection
+                    key={tournament}
+                    tournament={tournament}
+                    matches={tournamentMatches}
+                />
+            ))}
+
         </div>
 
-        <div className="form-group">
-          <label>Player B ID:</label>
-          <input
-            type="number"
-            value={playerId2}
-            onChange={(e) => setPlayerId2(e.target.value)}
-            placeholder="Enter player ID"
-          />
-        </div>
+    )
 
-        <button type="submit" disabled={loading} className="btn btn-primary">
-          {loading ? 'Predicting...' : 'Get Prediction'}
-        </button>
-      </form>
-
-      {result && (
-        <div className="prediction-result">
-          <h2>Prediction Result</h2>
-          <div className="result-box">
-            <p>Player A Win Probability: {(result.prediction?.player_a_win_probability * 100).toFixed(2)}%</p>
-            <p>Player B Win Probability: {(result.prediction?.player_b_win_probability * 100).toFixed(2)}%</p>
-            <p>Confidence: {(result.prediction?.confidence * 100).toFixed(2)}%</p>
-          </div>
-        </div>
-      )}
-    </div>
-  )
 }
+
+export default PredictionsPage

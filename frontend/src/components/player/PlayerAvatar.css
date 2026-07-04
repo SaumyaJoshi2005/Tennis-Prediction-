@@ -1,0 +1,39 @@
+.player-avatar {
+    align-items: center;
+    background:
+        radial-gradient(circle at 30% 25%, rgba(255, 255, 255, 0.5), transparent 34%),
+        linear-gradient(135deg, rgba(var(--accent-rgb), 0.95), rgba(255, 255, 255, 0.18));
+    border: 1px solid rgba(255, 255, 255, 0.28);
+    border-radius: 50%;
+    box-shadow: 0 12px 28px rgba(0, 0, 0, 0.22);
+    color: #041320;
+    display: inline-flex;
+    flex: 0 0 auto;
+    font-weight: 900;
+    justify-content: center;
+    overflow: hidden;
+}
+
+.player-avatar img {
+    height: 100%;
+    object-fit: cover;
+    width: 100%;
+}
+
+.player-avatar-sm {
+    font-size: 0.78rem;
+    height: 38px;
+    width: 38px;
+}
+
+.player-avatar-md {
+    font-size: 0.95rem;
+    height: 52px;
+    width: 52px;
+}
+
+.player-avatar-lg {
+    font-size: 1.15rem;
+    height: 68px;
+    width: 68px;
+}
